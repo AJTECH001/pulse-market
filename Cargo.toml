@@ -1,0 +1,29 @@
+[package]
+name = "pulse-market"
+version = "0.1.0"
+authors = ["Akindo Labs"]
+edition = "2021"
+
+[dependencies]
+async-graphql = "7.0.17"
+linera-sdk = { git = "https://github.com/linera-io/linera-protocol", branch = "main" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[dev-dependencies]
+linera-sdk = { git = "https://github.com/linera-io/linera-protocol", branch = "main", features = ["test", "wasmer"] }
+tokio = { version = "1.25", features = ["macros", "rt-multi-thread"] }
+
+[[bin]]
+name = "pulse_market_contract"
+path = "src/contract.rs"
+
+[[bin]]
+name = "pulse_market_service"
+path = "src/service.rs"
+
+[profile.release]
+debug = true
+lto = true
+opt-level = 'z'
+strip = 'debuginfo'
